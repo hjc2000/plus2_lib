@@ -1,0 +1,46 @@
+﻿@page "/"
+@using ModulatorLib;
+
+<article>
+	<div style="margin-bottom:1em;">
+		<input @bind="_requestUrl" />
+	</div>
+
+	<table>
+		@foreach (KeyValuePair<string, FormItem> pair in _form)
+		{
+			FormItem formItem = pair.Value;
+			<tr>
+				<td>@pair.Value.Name</td>
+				<td>
+					@switch (formItem.Type)
+					{
+					case "FormItem":
+						{
+							<input @bind="formItem.Value" />
+							break;
+						}
+					case "SelectTag":
+						{
+							SelectTag selectItem = (SelectTag)formItem;
+							List<string> options = selectItem.Options;
+							<select @bind="selectItem.Value">
+								@foreach (string option in options)
+								{
+									<option>@option</option>
+								}
+							</select>
+							break;
+						}
+					}
+				</td>
+			</tr>
+		}
+	</table>
+
+	<div>
+		<button @onclick="OnSubmitButtonClick">提交按钮</button>
+		<button @onclick="OnNextFreq">下一个频率</button>
+		<button @onclick="OnFlush">刷新</button>
+	</div>
+</article>

@@ -1,0 +1,30 @@
+.page {
+	display: flex; /*将根节点设置为弹性盒*/
+	flex-direction: column;
+	height: 100vh; /*根节点弹性盒宽度设置为100vh，使得占据全部高度*/
+}
+
+main {
+	flex: 1; /*占据全部剩余高度（宽度）*/
+	overflow: scroll;
+}
+
+.sidebar {
+	background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+}
+
+/*屏幕宽度大于一定值时，采用横向弹性盒的呈现方式*/
+@media (min-width: 641px) {
+	.page {
+		flex-direction: row;
+	}
+
+	.sidebar {
+		width: 260px;
+	}
+
+	main {
+		padding-left: 2rem !important;
+		padding-right: 1.5rem !important;
+	}
+}
